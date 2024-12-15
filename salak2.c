@@ -6,13 +6,13 @@
 /*   By: aysadeq <aysadeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 15:52:25 by aysadeq           #+#    #+#             */
-/*   Updated: 2024/12/13 18:52:50 by aysadeq          ###   ########.fr       */
+/*   Updated: 2024/12/15 18:33:59 by aysadeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	num_length(int n)
+int	num_length(long n)
 {
 	int	len;
 
@@ -26,7 +26,7 @@ int	num_length(int n)
 	}
 	return (len);
 }
-int	ft_putnbr(int n)
+int	ft_putnbr(long n)
 {
 	int 	count;
 	char	c;

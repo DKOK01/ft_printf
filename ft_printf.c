@@ -6,7 +6,7 @@
 /*   By: aysadeq <aysadeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:47:55 by aysadeq           #+#    #+#             */
-/*   Updated: 2024/12/13 17:30:42by aysadeq          ###   ########.fr       */
+/*   Updated: 2024/12/15 15:21:21 by aysadeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
 
 	count = 0;
 	if (*fmt == 'c')
-	{
 		count = ft_putchar(va_arg(args, int));
-	}
 	else if (*fmt == 's')
-	{
 		count = ft_putstr(va_arg(args, char *));
-	}
-	else if (*fmt == 'd')
-	{
+	else if (*fmt == 'd' || *fmt == 'i')
 		count = ft_putnbr(va_arg(args, int));
-	}
+	else if (*fmt == 'u')
+		count = ft_putnbr(va_arg(args, unsigned int));
+		
+
+	else if (*fmt == '%')
+		count = write(1, "%", 1);
 	return count;
 }
 
@@ -53,12 +53,12 @@ int	ft_printf(const char *fmt, ...)
 
 int main()
 {
-	int count = ft_printf("%d\n", 0);
+	int count = ft_printf("%%\n");
 	printf("%d \n",count);
 
 
 
-	count = printf("%d\n", 0);
+	count = printf("%%\n");
 	printf("%d \n",count);
 
 
