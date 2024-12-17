@@ -6,7 +6,7 @@
 /*   By: aysadeq <aysadeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:47:55 by aysadeq           #+#    #+#             */
-/*   Updated: 2024/12/16 12:12:47 by aysadeq          ###   ########.fr       */
+/*   Updated: 2024/12/17 10:58:34 by aysadeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	handl_fmt(const char *fmt, va_list args)
 		count = ft_putnbr(va_arg(args, unsigned int));
 	else if (*fmt == 'x' || *fmt == 'X')
 		count = ft_puthex(va_arg(args, unsigned int),*fmt);
+	else if (*fmt == 'p')
+		count = ft_putptr(va_arg(args, void *));
 	else if (*fmt == '%')
 		count = write(1, "%", 1);
 	return (count);
@@ -51,11 +53,12 @@ int	ft_printf(const char *fmt, ...)
 	return (count);
 }
 
-int main()
-{
-	int count = ft_printf("%X\n", -2147483648);
-	printf("%d \n",count);
-	count = printf("%X\n", -2147483648);
-	printf("%d \n",count);
-	return 0;
-}
+// int main()
+// {
+// 	char *ptr = NULL;
+// 	int count = ft_printf("%p\n", ptr);
+// 	printf("%d \n",count);
+// 	count = printf("%p\n", ptr);
+// 	printf("%d \n",count);
+// 	return 0;
+// }
