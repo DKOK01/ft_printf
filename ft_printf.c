@@ -6,7 +6,7 @@
 /*   By: aysadeq <aysadeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:47:55 by aysadeq           #+#    #+#             */
-/*   Updated: 2024/12/17 10:58:34 by aysadeq          ###   ########.fr       */
+/*   Updated: 2024/12/17 11:00:10 by aysadeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,3 @@ int	ft_printf(const char *fmt, ...)
 	va_end(args);
 	return (count);
 }
-
-// int main()
-// {
-// 	char *ptr = NULL;
-// 	int count = ft_printf("%p\n", ptr);
-// 	printf("%d \n",count);
-// 	count = printf("%p\n", ptr);
-// 	printf("%d \n",count);
-// 	return 0;
-// }
