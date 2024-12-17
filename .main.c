@@ -77,5 +77,12 @@ int main(void)
     custom = ft_printf("Custom:   [%%]\n");
     printf("Return: Original [%d], Custom [%d]\n", original, custom);
 
+    printf("\n===== Testing %% (Percent Sign) =====\n");
+    original = printf("Original: %");
+	printf("\n");
+    custom = ft_printf("Custom: %");
+	printf("\n");
+    printf("Return: Original [%d], Custom [%d]\n", original, custom);
+
     return 0;
 }

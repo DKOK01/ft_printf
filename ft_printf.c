@@ -6,7 +6,7 @@
 /*   By: aysadeq <aysadeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:47:55 by aysadeq           #+#    #+#             */
-/*   Updated: 2024/12/17 11:00:10 by aysadeq          ###   ########.fr       */
+/*   Updated: 2024/12/17 14:11:30 by aysadeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	handl_fmt(const char *fmt, va_list args)
 		count = ft_putptr(va_arg(args, void *));
 	else if (*fmt == '%')
 		count = write(1, "%", 1);
+	else if (*fmt == '\0')
+		return (-1);
 	return (count);
 }
 
@@ -38,15 +40,25 @@ int	ft_printf(const char *fmt, ...)
 {
 	va_list		args;
 	int			count;
+	int			n;
 
 	va_start(args, fmt);
 	count = 0;
+	n = 0;
 	while (*fmt)
 	{
 		if (*fmt != '%')
 			count += write(1, fmt, 1);
 		else
-			count += handl_fmt(++fmt, args);
+		{
+			n = handl_fmt(++fmt, args);
+			if (n == -1)
+			{
+				va_end(args);
+				return (-1);
+			}
+			count += n;
+		}
 		fmt++;
 	}
 	va_end(args);
