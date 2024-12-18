@@ -6,7 +6,7 @@
 /*   By: aysadeq <aysadeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 11:47:55 by aysadeq           #+#    #+#             */
-/*   Updated: 2024/12/18 15:33:15 by aysadeq          ###   ########.fr       */
+/*   Updated: 2024/12/18 17:40:21 by aysadeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int	handl_fmt(const char *fmt, va_list args)
 		count = catch_err(ft_putchar('%'));
 	else if (*fmt == '\0')
 		return (-1);
+	else
+	{
+		count = catch_err(ft_putchar('%'));
+		count += catch_err(ft_putchar(*fmt));
+	}
 	return (count);
 }
 
