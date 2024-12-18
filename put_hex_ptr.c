@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   salak3.c                                           :+:      :+:    :+:   */
+/*   put_hex_ptr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aysadeq <aysadeq@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 10:25:27 by aysadeq           #+#    #+#             */
-/*   Updated: 2024/12/17 10:59:00 by aysadeq          ###   ########.fr       */
+/*   Updated: 2024/12/18 11:40:03 by aysadeq          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_puthex(unsigned long n, char fmt)
 	if (n >= 16)
 		count += ft_puthex((n / 16), fmt);
 	c = base[n % 16];
-	count += write(1, &c, 1);
+	count += catch_err(ft_putchar(c));
 	return (count);
 }
 
@@ -37,10 +37,10 @@ int	ft_putptr(void *ptr)
 	count = 0;
 	if (!ptr)
 	{
-		count = write(1, "(nil)", 5);
+		count = ft_putstr("(nil)");
 		return (count);
 	}
-	count = write(1, "0x", 2);
+	count = ft_putstr("0x");
 	count += ft_puthex((unsigned long)ptr, 'x');
 	return (count);
 }
