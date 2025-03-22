@@ -1,23 +1,52 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRC = ft_printf.c put_char_str.c putnbr.c put_hex_ptr.c
-OBJ = $(SRC:.c=.o)
-NAME = libftprintf.a
 
-all: $(NAME)
+MANDATORY_SERVER = server
+MANDATORY_CLIENT = client
+BONUS_SERVER = server_bonus
+BONUS_CLIENT = client_bonus
 
-$(NAME): $(OBJ)
-	ar rcs $@ $^
+LIBFT_DIR = includes/libft
+LIBFT = $(LIBFT_DIR)/libft.a
+
+SRCS_MANDATORY_SERVER = src/server.c
+SRCS_MANDATORY_CLIENT = src/client.c
+SRCS_BONUS_SERVER = bonus/server_bonus.c
+SRCS_BONUS_CLIENT = bonus/client_bonus.c
+
+OBJS_MANDATORY_SERVER = $(SRCS_MANDATORY_SERVER:.c=.o)
+OBJS_MANDATORY_CLIENT = $(SRCS_MANDATORY_CLIENT:.c=.o)
+OBJS_BONUS_SERVER = $(SRCS_BONUS_SERVER:.c=.o)
+OBJS_BONUS_CLIENT = $(SRCS_BONUS_CLIENT:.c=.o)
+
+all: $(LIBFT) $(MANDATORY_SERVER) $(MANDATORY_CLIENT)
+
+$(LIBFT):
+	make -C $(LIBFT_DIR)
+
+$(MANDATORY_SERVER): $(OBJS_MANDATORY_SERVER) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS_MANDATORY_SERVER) -L$(LIBFT_DIR) -lft -o $(MANDATORY_SERVER)
+
+$(MANDATORY_CLIENT): $(OBJS_MANDATORY_CLIENT) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS_MANDATORY_CLIENT) -L$(LIBFT_DIR) -lft -o $(MANDATORY_CLIENT)
+
+bonus: $(LIBFT) $(BONUS_SERVER) $(BONUS_CLIENT)
+
+$(BONUS_SERVER): $(OBJS_BONUS_SERVER) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS_BONUS_SERVER) -L$(LIBFT_DIR) -lft -o $(BONUS_SERVER)
+
+$(BONUS_CLIENT): $(OBJS_BONUS_CLIENT) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS_BONUS_CLIENT) -L$(LIBFT_DIR) -lft -o $(BONUS_CLIENT)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJS_MANDATORY_SERVER) $(OBJS_MANDATORY_CLIENT) $(OBJS_BONUS_SERVER) $(OBJS_BONUS_CLIENT)
+	make clean -C $(LIBFT_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(MANDATORY_SERVER) $(MANDATORY_CLIENT) $(BONUS_SERVER) $(BONUS_CLIENT)
+	make fclean -C $(LIBFT_DIR)
 
 re: fclean all
-
-.PHONY:	clean
